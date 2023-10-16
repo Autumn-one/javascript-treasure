@@ -1,10 +1,40 @@
 {
     "name": "javascript-treasure",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
-    "main": "index.js",
+    "main": "dist/cjs/index.js",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/es/index.js",
+            "require": "./dist/cjs/index.js"
+        },
+        "./es": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/es/index.js",
+            "default": "./dist/es/index.js"
+        },
+        "./cjs": {
+            "types": "./dist/index.d.ts",
+            "require": "./dist/cjs/index.js",
+            "default": "./dist/cjs/index.js"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Autumn-one/javascript-treasure"
+    },
+    "types": "./dist/calc.d.ts",
+    "typings": "./dist/calc.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build:es": "tsc index.ts --module esnext --declaration false --outDir dist/es --removeComments",
+        "build:cjs": "tsc index.ts --module commonjs --declaration false --outDir dist/cjs --removeComments",
+        "build:dts": "tsc index.ts -d --emitDeclarationOnly --outDir dist --removeComments",
+        "build": "pnpm build:es & pnpm build:cjs & pnpm build:dts"
     },
     "keywords": [],
     "author": "",
