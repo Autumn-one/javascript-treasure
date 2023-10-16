@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.throttle = exports.debounce = void 0;
 function debounce(func, wait, immediate) {
     if (immediate === void 0) { immediate = true; }
-    var timer_id = null;
+    var timer_id;
     var last_call_time = 0;
+    var last_call_type = "timeout";
     return function () {
         var _this = this;
         var args = [];
@@ -13,14 +14,29 @@ function debounce(func, wait, immediate) {
         }
         var now = +new Date();
         timer_id && clearTimeout(timer_id);
-        if (immediate && (now - last_call_time >= wait || last_call_time == 0)) {
+        var time_diff = now - last_call_time;
+        if (immediate && last_call_type !== "immediate" && (time_diff >= wait || last_call_time == 0)) {
             last_call_time = now;
+            last_call_type = "immediate";
             func.apply(this, args);
+            return;
         }
-        timer_id = setTimeout(function () {
-            last_call_time = now;
-            func.apply(_this, args);
-        }, wait);
+        if (immediate) {
+            if (last_call_type === "immediate" && time_diff >= wait) {
+                timer_id = setTimeout(function () {
+                    last_call_time = now;
+                    last_call_type = "timeout";
+                    func.apply(_this, args);
+                }, wait);
+            }
+        }
+        else {
+            timer_id = setTimeout(function () {
+                last_call_time = now;
+                last_call_type = "timeout";
+                func.apply(_this, args);
+            }, wait);
+        }
     };
 }
 exports.debounce = debounce;
