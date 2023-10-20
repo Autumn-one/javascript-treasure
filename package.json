@@ -1,6 +1,6 @@
 {
     "name": "javascript-treasure",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "",
     "main": "dist/cjs/index.js",
     "exports": {
@@ -40,6 +40,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "typescript": "^5.2.2"
+        "typescript": "^5.2.2",
+        "vitest": "^0.34.6"
     }
 }
