@@ -22,7 +22,7 @@ function debounce ( func: Function, wait: number, type: "t-d" | "i-d" | "d" = "d
             immediate_timer = setTimeout( () => ( immediate = true ), wait );
             cancel_callback && cancel_callback();
             func.apply( this, args );
-            return
+            return;
         }
 
         timer_id && clearTimeout( timer_id );
@@ -80,11 +80,19 @@ function debounce ( func: Function, wait: number, type: "t-d" | "i-d" | "d" = "d
  * 节流函数
  * @param func 要被节流的函数
  * @param wait 节流时间
- * @param immediate 是否第一时间执行
  * */
-function throttle ( func, wait, immediate )
+function throttle ( func: Function, wait: number ): Function
 {
-
+    let last_call_time = 0;
+    return function ( this: any, ...args: any[] )
+    {
+        const now = +new Date();
+        if ( now - last_call_time >= wait || last_call_time === 0 )
+        {
+            func.apply( this, args );
+            last_call_time = now;
+        }
+    };
 }
 
 
