@@ -1,6 +1,6 @@
 {
     "name": "javascript-treasure",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "",
     "main": "dist/cjs/index.js",
     "exports": {
@@ -27,8 +27,8 @@
         "type": "git",
         "url": "git+https://github.com/Autumn-one/javascript-treasure"
     },
-    "types": "./dist/calc.d.ts",
-    "typings": "./dist/calc.d.ts",
+    "types": "./dist/index.d.ts",
+    "typings": "./dist/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build:es": "tsc index.ts --module esnext --declaration false --outDir dist/es --removeComments",

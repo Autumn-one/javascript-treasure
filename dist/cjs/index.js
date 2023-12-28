@@ -69,6 +69,18 @@ function debounce(func, wait, type, cancel_callback) {
     return type === "i-d" ? immediate_debounce : type === "t-d" ? throttle_debounce : d_debounce;
 }
 exports.debounce = debounce;
-function throttle(func, wait, immediate) {
+function throttle(func, wait) {
+    var last_call_time = 0;
+    return function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var now = +new Date();
+        if (now - last_call_time >= wait || last_call_time === 0) {
+            func.apply(this, args);
+            last_call_time = now;
+        }
+    };
 }
 exports.throttle = throttle;
