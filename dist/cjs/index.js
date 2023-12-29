@@ -77,7 +77,15 @@ function throttle(func, wait) {
             args[_i] = arguments[_i];
         }
         var now = +new Date();
-        if (now - last_call_time >= wait || last_call_time === 0) {
+        var delay_time;
+        if (typeof wait === "number") {
+            delay_time = wait;
+        }
+        else {
+            delay_time = wait.time;
+            args.push(wait);
+        }
+        if (now - last_call_time >= delay_time || last_call_time === 0) {
             func.apply(this, args);
             last_call_time = now;
         }

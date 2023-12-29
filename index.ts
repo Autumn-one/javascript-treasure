@@ -81,13 +81,23 @@ function debounce ( func: Function, wait: number, type: "t-d" | "i-d" | "d" = "d
  * @param func 要被节流的函数
  * @param wait 节流时间
  * */
-function throttle ( func: Function, wait: number ): Function
+function throttle ( func: Function, wait: number | { time: number } ): Function
 {
     let last_call_time = 0;
     return function ( this: any, ...args: any[] )
     {
         const now = +new Date();
-        if ( now - last_call_time >= wait || last_call_time === 0 )
+        let delay_time: number;
+        if(typeof wait === "number")
+        {
+            delay_time = wait;
+        }
+        else
+        {
+            delay_time = wait.time;
+            args.push(wait);
+        }
+        if ( now - last_call_time >= delay_time || last_call_time === 0 )
         {
             func.apply( this, args );
             last_call_time = now;
