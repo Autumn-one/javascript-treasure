@@ -106,6 +106,8 @@ function throttle ( func: Function, wait: number | { time: number } ): Function
 }
 
 
+
+
 export {
     debounce,
     throttle
