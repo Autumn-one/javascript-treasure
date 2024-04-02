@@ -1,46 +1,67 @@
 {
     "name": "javascript-treasure",
-    "version": "1.0.11",
-    "description": "",
-    "main": "dist/cjs/index.js",
+    "version": "1.0.12",
+    "description": "javascript相关的工具集合",
+    "main": "./dist/cjs/index.js",
     "exports": {
         ".": {
-            "types": "./dist/index.d.ts",
             "import": "./dist/es/index.js",
-            "require": "./dist/cjs/index.js"
+            "require": "./dist/cjs/index.js",
+            "types": "./dist/index.d.ts"
         },
         "./es": {
-            "types": "./dist/index.d.ts",
             "import": "./dist/es/index.js",
-            "default": "./dist/es/index.js"
+            "default": "./dist/es/index.js",
+            "types": "./dist/index.d.ts"
         },
         "./cjs": {
-            "types": "./dist/index.d.ts",
             "require": "./dist/cjs/index.js",
-            "default": "./dist/cjs/index.js"
+            "default": "./dist/cjs/index.js",
+            "types": "./dist/index.d.ts"
         }
+    },
+    "browser": "./dist/browser/index.js",
+    "module": "./dist/es/index.js",
+    "types": "./dist/index.d.ts",
+    "typing": "./dist/index.d.ts",
+    "scripts": {
+        "dev": "rollup -c --environment build:dev",
+        "dev:w": "rollup -c -w  --environment build:dev",
+        "build": "rollup -c --environment build:build & pnpm test",
+        "build:w": "rollup -c -w --environment build:build",
+        "test": "vitest run"
     },
     "files": [
         "dist"
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Autumn-one/javascript-treasure"
+        "url": "git+https://github.com/Autumn-one/javascript-treasure.git"
     },
-    "types": "./dist/index.d.ts",
-    "typings": "./dist/index.d.ts",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build:es": "tsc index.ts --module esnext --declaration false --outDir dist/es --removeComments",
-        "build:cjs": "tsc index.ts --module commonjs --declaration false --outDir dist/cjs --removeComments",
-        "build:dts": "tsc index.ts -d --emitDeclarationOnly --outDir dist --removeComments",
-        "build": "pnpm build:es & pnpm build:cjs & pnpm build:dts"
+    "keywords": [
+        "util",
+        "javascript",
+        "functional"
+    ],
+    "author": "Autumn",
+    "license": "None",
+    "bugs": {
+        "url": "https://github.com/Autumn-one/javascript-treasure/issues"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "homepage": "https://github.com/Autumn-one/javascript-treasure#readme",
     "devDependencies": {
-        "typescript": "^5.2.2",
-        "vitest": "^0.34.6"
+        "@rollup/plugin-json": "6.1.0",
+        "@rollup/plugin-node-resolve": "15.2.3",
+        "@rollup/plugin-terser": "0.4.4",
+        "glob": "10.3.10",
+        "rollup": "4.12.0",
+        "rollup-plugin-dts": "6.1.0",
+        "rollup-plugin-ts": "3.4.5",
+        "tslib": "2.6.2",
+        "typescript": "5.3.3",
+        "vitest": "1.3.1"
+    },
+    "dependencies": {
+        "typescript-treasure": "^0.0.10"
     }
 }

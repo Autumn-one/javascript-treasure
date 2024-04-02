@@ -7,11 +7,11 @@
  * */
 function debounce ( func: Function, wait: number, type: "t-d" | "i-d" | "d" = "d", cancel_callback?: Function ): Function
 {
-    let timer_id: number; // 定义定时器id
+    let timer_id: ReturnType<typeof setTimeout>; // 定义定时器id
     let last_call_time = 0; // 最后一次调用的时间记录
     let last_call_type: "immediate" | "timeout" = "timeout"; // 最后一次函数以什么方式触发
     let immediate = true; // 在 type=i-d的时候用于表示是否要第一次立即执行
-    let immediate_timer: number; // 是否立即执行的timer
+    let immediate_timer: ReturnType<typeof setTimeout>; // 是否立即执行的timer
 
     // type = i-d
     const immediate_debounce = function ( this: any, ...args: any[] )
