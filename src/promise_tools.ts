@@ -1,25 +1,3 @@
-// 闲时函数
-function idle( callback: Function, delay = 1000 )
-{
-    if ( typeof requestIdleCallback !== "undefined" )
-    {
-        return requestIdleCallback( <IdleRequestCallback>callback );
-    }
-    else
-    {
-        return setTimeout( callback, delay );
-    }
-}
-
-// 异步闲时函数
-function async_idle( delay = 1000 )
-{
-    return new Promise( resolve =>
-    {
-        idle( resolve, delay );
-    } );
-}
-
 /**
  * 管理promise队列，让promise按照队列顺序来请求, 每个promise都会有一个默认的timeout
  * @fnName promise_queue
@@ -93,7 +71,5 @@ function promise_timeout( ps: Promise<any>, min_time: number | null = null, max_
 
 export {
     promise_timeout,
-    promise_queue,
-    idle,
-    async_idle
+    promise_queue
 }

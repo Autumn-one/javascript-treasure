@@ -1,4 +1,4 @@
-import { promise_timeout } from "../promise_tools";
+import { promise_timeout } from "../src/promise_tools";
 
 const ps = promise_timeout(
     new Promise( ( resolve, reject ) =>
