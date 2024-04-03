@@ -29,7 +29,8 @@
         "dev:w": "rollup -c -w  --environment build:dev",
         "build": "rollup -c --environment build:build & pnpm test",
         "build:w": "rollup -c -w --environment build:build",
-        "test": "vitest run"
+        "test": "vitest run",
+        "coverage": "vitest run --coverage"
     },
     "files": [
         "dist"
@@ -53,6 +54,7 @@
         "@rollup/plugin-json": "6.1.0",
         "@rollup/plugin-node-resolve": "15.2.3",
         "@rollup/plugin-terser": "0.4.4",
+        "@vitest/coverage-v8": "^1.4.0",
         "glob": "10.3.10",
         "rollup": "4.12.0",
         "rollup-plugin-dts": "6.1.0",
