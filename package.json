@@ -1,6 +1,6 @@
 {
     "name": "javascript-treasure",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "description": "javascript相关的工具集合",
     "main": "./dist/cjs/index.js",
     "exports": {

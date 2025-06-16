@@ -25,6 +25,7 @@ declare function async_idle(delay?: number): Promise<unknown>;
  * @param cancel_callback 下一次执行的时候可能需要清理的callback，例如取消请求操作
  * */
 declare function debounce(func: Function, wait: number, type?: "t-d" | "i-d" | "d", cancel_callback?: Function): Function;
+declare function is_object(value: any): boolean;
 /**
  * 节流函数
  * @param func 要被节流的函数
@@ -37,5 +38,7 @@ declare function retry(fn: (...args: any[]) => Promise<any>, options?: {
     times: number;
     on_failed: (err: any, count: any) => any;
 }): Promise<any>;
+declare function deep_equal(object1: any, object2: any): boolean;
+declare function pascal_to_kebab(str: string): string;
 
-export { async_idle, debounce, idle, promise_queue, promise_timeout, retry, throttle };
+export { async_idle, debounce, deep_equal, idle, is_object, pascal_to_kebab, promise_queue, promise_timeout, retry, throttle };
