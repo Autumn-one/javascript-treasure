@@ -24,6 +24,9 @@
     "module": "./dist/es/index.js",
     "types": "./dist/index.d.ts",
     "typing": "./dist/index.d.ts",
+    "engines": {
+        "node": "18.x"
+    },
     "scripts": {
         "dev": "rollup -c --environment build:dev",
         "dev:w": "rollup -c -w  --environment build:dev",
