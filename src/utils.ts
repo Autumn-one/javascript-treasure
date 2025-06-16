@@ -99,6 +99,11 @@ function debounce( func: Function, wait: number, type: "t-d" | "i-d" | "d" = "d"
     return type === "i-d" ? immediate_debounce : type === "t-d" ? throttle_debounce : d_debounce;
 }
 
+function is_object(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
 /**
  * 节流函数
  * @param func 要被节流的函数
@@ -154,10 +159,55 @@ async function retry( fn: ( ...args: any[] ) => Promise<any>, options?: { times:
     return ret;
 }
 
+
+function deep_equal( object1, object2 )
+{
+    if ( object1 === null || object2 === null )
+    {
+        return object1 === object2;
+    }
+    const keys1 = Object.keys( object1 );
+    const keys2 = Object.keys( object2 );
+
+
+    const keys = Array.from( new Set( [ ...keys1, ...keys2 ] ) );
+
+    for ( const key of keys )
+    {
+        const val1 = object1[key];
+        const val2 = object2[key];
+        const are_objects = is_object( val1 ) && is_object( val2 );
+        if ( [ '', undefined ].includes( val1 ) && [ '', undefined ].includes( val2 ) )
+        {
+            continue;
+        }
+        if (
+            are_objects && !deep_equal( val1, val2 )
+            || !are_objects && val1 !== val2
+        )
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function pascal_to_kebab( str: string ): string
+{
+    return str
+        .replace( /([A-Z])/g, '-$1' )
+        .toLowerCase()
+        .replace( /^-/, '' );
+}
+
 export {
     throttle,
     debounce,
     idle,
     async_idle,
-    retry
+    retry,
+    deep_equal,
+    is_object,
+    pascal_to_kebab
 }
